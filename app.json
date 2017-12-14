@@ -1,0 +1,8 @@
+{
+  "name": "Docker Heroku Example",
+  "description": "An example app.json for container-deploy",
+  "image": "heroku/ruby",
+  "addons": [
+    "heroku-postgresql"
+  ]
+}
