@@ -9,9 +9,11 @@ before_script:
 script:
 - docker-compose run --rm notes bundle exec rake spec
 after_success:
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u _ -p "$HEROKU_TOKEN"  registry.heroku.com
-  docker build -t registry.heroku.com/notes/web -f Dockerfile.production . docker
-  push registry.heroku.com/notes/web fi
+- if [ "$TRAVIS_BRANCH" == "master" ]; then
+  docker login -u _ -p "$HEROKU_TOKEN"  registry.heroku.com
+  docker build -t registry.heroku.com/notes/web -f Dockerfile.production .
+  docker push registry.heroku.com/notes/web
+  fi
 env:
   global:
     secure: Fl43mDrXMnpx+EmpWtIlys7QlTQW5rMwVuHDUaWpETCxQktXrjGXB6TBRCCUuyBqsMh3exx1ywSlP8XJSsbtGfKpogLKlDjk/wAZJ9WhUco5rVwIMAVrktoOCxeFPML2vk9b57DBv1tieKXhLh1841oku4n2x7v+9aUrscU13U596oVWEoJiOgmBouRP9kw8yViL14xNFUqwJI0Fjt6hox54HVrRjDlzQFOBOMsDhE0LkGztLQ89iOZgySRua8IZzQU9eVmk9LIq1R18oeu7w0WKFY5j8LJgiTWf1mh1js1jAU12/bHHSsU0+tFpeIiCh3XzGb3PTe48I4omf+lgeVvh/gDPzSZaYKmfIIZ3HQswqPBy4mFUfQPfLky0fxtnRzdlimyxDeUtaweEvW/Ye9jM9TGI7+0OcxzjfEGU1HXU9HWGcvyA83AjLht8zHx+KbfRu70K1BSDKiRdzSel2aToFlMn1j0QXiZ83ENdyIuP29wxE78PsmbtwcgNyFqitFLXa3/VrJsaes2IMpunnJ2Z63JMOGHfrljTX7cKCu92yZgtRnptl+rCFjjQ/HE2Z3s8zvqx49/bITMBcF4PqtqiuVwq+fTca0UdBSw8J65HQElu6jD0SkAEtAAOElINm6bQ4Aanix/7yXaTbj+e8H5KKkOKH8xdDIuZrBEzBds=
