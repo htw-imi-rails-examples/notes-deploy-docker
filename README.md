@@ -21,21 +21,26 @@ start the database, build and start the web app:
                --name web \
                notes/notes:293ef60
 
-
-
-further commands
 execute bash in container:
     docker exec -ti web bash
 
 ## Pushing the image to Heroku
 Documentation:
+
+* [Container Registry & Runtime (Docker Deploys)](https://devcenter.heroku.com/articles/container-registry-and-runtime)
+
 https://docs.travis-ci.com/user/docker/#Pushing-a-Docker-Image-to-a-Registry
 
 to get the heroku token into a env variable:
 
     export HEROKU_TOKEN=$(heroku auth:token)
+set the env variable on travis (switch "show it in the log" to off!)
 
-to test from local box:
+add these steps to travis.yml (can also be tested locally)
+
+- docker login -u _ -p "$HEROKU_TOKEN"  registry.heroku.com
+- docker build -t registry.heroku.com/notes/web -f Dockerfile.production .
+- docker push registry.heroku.com/notes/web
     docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
 
 
