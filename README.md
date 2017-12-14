@@ -35,11 +35,13 @@ to get the heroku token into a env variable:
 
     export HEROKU_TOKEN=$(heroku auth:token)
 
-test from local box:
+to test from local box:
     docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
-
-   heroku login
 
 
 add HEROKU_TOKEN to .travis.yml
 travis encrypt HEROKU_TOKEN=$(heroku auth:token) --add env.global
+
+
+
+https://devcenter.heroku.com/articles/local-development-with-docker-compose
