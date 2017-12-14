@@ -1,8 +1,13 @@
-language: ruby
-rvm:
-- 2.4.2
+language: generic
+sudo: required
+services:
+- docker
+before_script:
+- sudo /etc/init.d/postgresql stop
+- docker-compose build
+- docker-compose run notes bundle exec rails db:test:prepare
 script:
-- bundle exec rspec spec
+- docker-compose run --rm notes bundle exec rake spec
 after_success:
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker login -u _ -p "$HEROKU_TOKEN"  registry.heroku.com
   docker build -t registry.heroku.com/notes/web -f Dockerfile.production . docker
