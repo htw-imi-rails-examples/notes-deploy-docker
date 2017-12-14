@@ -3,3 +3,9 @@ rvm:
   - 2.4.2
 script:
   - bundle exec rspec spec
+after_success:
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then
+    docker login -u _ -p "$HEROKU_TOKEN"  registry.heroku.com
+    docker build -t registry.heroku.com/notes/web -f Dockerfile.production .
+    docker push registry.heroku.com/notes/web
+    fi

@@ -28,8 +28,14 @@ execute bash in container:
     docker exec -ti web bash
 
 ## Pushing the image to Heroku
-
+Documentation:
 https://docs.travis-ci.com/user/docker/#Pushing-a-Docker-Image-to-a-Registry
 
+to get the heroku token into a env variable:
+
+    export HEROKU_TOKEN=$(heroku auth:token)
+
+test from local box:
+    docker login -u _ -p $HEROKU_TOKEN registry.heroku.com
 
    heroku login
